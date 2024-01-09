@@ -20,7 +20,7 @@ class GuestController extends Controller
     {
         $entity = Entity::where(function($query) use ($request) {
                             return $query->where("cliente_codigo", $request->client )
-                            ->orWhereRaw("cast(cliente_codigo as int) = ?", intval( $request->client) );
+                            ->orWhereRaw("cast(cliente_codigo as UNSIGNED) = ?", intval( $request->client) );
                         })
                         ->where('fecha',  $request->date ?? (new Datetime)->format('Y-m-d') )
                         ->first();
